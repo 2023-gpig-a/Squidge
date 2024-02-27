@@ -1,0 +1,9 @@
+[submodule "frontend"]
+	path = frontend
+	url = git@github.com:2023-gpig-a/frontend.git
+[submodule "DMAS"]
+	path = DMAS
+	url = git@github.com:2023-gpig-a/DMAS.git
+[submodule "LLM"]
+	path = LLM
+	url = git@github.com:2023-gpig-a/LLM.git
