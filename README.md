@@ -17,3 +17,12 @@ $ git submodule update --init --recursive
 ```
 $ docker-compose up -d
 ```
+
+### adding a new repo to the squidge
+
+```sh
+$ git submodule add git@github.com:2023-gpig-a/magical-new-subproject.git
+$ git add magical-new-subproject
+$ git commit
+$ git push
+```
