@@ -7,3 +7,6 @@
 [submodule "LLM"]
 	path = LLM
 	url = git@github.com:2023-gpig-a/LLM.git
+[submodule "DroneManager"]
+	path = DroneManager
+	url = git@github.com:2023-gpig-a/DroneManager.git
