@@ -15,9 +15,6 @@ for repo in "${REPOS[@]}"; do
 done
 
 if [ $changed -eq 1 ]; then
-echo "Pushing changes"
-  git checkout -b "update-$(date +%Y%m%d%H%M%S)"
+  echo "Pushing changes"
   git push
-
-  gh pr create --title "Update submodules" --body "Update submodules" --base master --head "update-$(date +%Y%m%d%H%M%S)"
 fi
