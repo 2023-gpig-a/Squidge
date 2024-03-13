@@ -11,8 +11,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Set up Git HTTP auth
-        run: git config --global url."https://github-actions@github.com/".insteadOf "git@github.com:"
+      - name: Set up Git config
+        run: |
+          git config --global url."https://github-actions@github.com/".insteadOf "git@github.com:"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Update Submodules
         run: scripts/update-submodules.sh
         env:
