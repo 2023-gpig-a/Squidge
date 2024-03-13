@@ -22,7 +22,7 @@ services:
     build: ./frontend
     ports:
       - "8080:80"
-  dronemaanger:
+  dronemanager:
     build: ./DroneManager
     ports:
       - "8082:8080"
