@@ -18,6 +18,10 @@ services:
     build: ./DMAS
     ports:
       - "8081:8080"
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:80"
   dronemaanger:
     build: ./DroneManager
     ports:
