@@ -4,6 +4,9 @@ set -euo pipefail
 REPOS=(DMAS DroneManager frontend LLM)
 changed=0
 
+GIT_ASKPASS=$(pwd)/git-helper.sh
+export GIT_ASKPASS
+
 for repo in "${REPOS[@]}"; do
   echo "Updating $repo"
   git submodule update --remote --init --merge "$repo"

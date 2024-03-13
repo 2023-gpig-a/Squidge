@@ -10,8 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+      - name: Set up Git HTTP auth
+        run: git config --global url."https://github-actions@github.com/".insteadOf "git@github.com:"
       - name: Update Submodules
         run: scripts/update-submodules.sh
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
