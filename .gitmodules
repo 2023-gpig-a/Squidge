@@ -1,12 +1,12 @@
 [submodule "frontend"]
 	path = frontend
-	url = git@github.com:2023-gpig-a/frontend.git
+	url = https://github.com/2023-gpig-a/frontend.git
 [submodule "DMAS"]
 	path = DMAS
-	url = git@github.com:2023-gpig-a/DMAS.git
+	url = https://github.com/2023-gpig-a/DMAS.git
 [submodule "LLM"]
 	path = LLM
-	url = git@github.com:2023-gpig-a/LLM.git
+	url = https://github.com/2023-gpig-a/LLM.git
 [submodule "DroneManager"]
 	path = DroneManager
-	url = git@github.com:2023-gpig-a/DroneManager.git
+	url = https://github.com/2023-gpig-a/DroneManager.git
