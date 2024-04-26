@@ -15,7 +15,8 @@ services:
     ports:
       - "8081:8080"
     volumes:
-      - ./dmas_config.ini:/config.ini
+      - ./dmas_config.ini:/app/config.ini
+      - ./DMAS/models/human_detection/weights/human_classification_weights.pkl:/app/models/human_detection/weights/human_classification_weights.pkl
     environment:
       CONFIG_FILE: "/config.ini"
   frontend:
