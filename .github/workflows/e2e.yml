@@ -32,4 +32,13 @@ jobs:
       - name: Install browsers
         run: playwright install chromium
       - name: Run tests
-        run: pytest --browser chromium e2e/
+        run: pytest --browser chromium --tracing retain-on-failure --video retain-on-failure e2e/
+      - name: Capture logs
+        if: always()
+        run: docker-compose -f docker-compose.yml logs > test-results/logs.txt
+      - name: Capture failure artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-results
+          path: test-results/
