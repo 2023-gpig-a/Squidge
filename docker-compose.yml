@@ -10,6 +10,7 @@ services:
       POSTGRES_PASSWORD: "heresapassword"
     volumes:
       - "dbfiles:/var/lib/postgresql/data"
+      - "./DMAS/sql/init.sql:/docker-entrypoint-initdb.d/01-dmas.sql"
   dmas:
     build: ./DMAS
     ports:

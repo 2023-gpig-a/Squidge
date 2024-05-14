@@ -1,0 +1,29 @@
+name: E2E Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+      - run: cp dmas_config.ini.example dmas_config.ini
+      - name: Run services
+        run: docker-compose -f docker-compose.yml up -d
+      - name: Install testing dependencies
+        run: pip install -r requirements.txt
+      - name: Install browsers
+        run: playwright install chromium
+      - name: Run tests
+        run: pytest --browser chromium e2e/
