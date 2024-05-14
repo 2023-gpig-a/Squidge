@@ -21,6 +21,8 @@ jobs:
           python-version: '3.x'
           cache: 'pip'
       - run: cp dmas_config.ini.example dmas_config.ini
+      - name: Download weights
+        run: wget -O DMAS/models/human_detection/weights/human_classification_weights.pkl https://storage.googleapis.com/2023-gpig-a/human_classification_weights.pkl
       - name: Run services
         run: docker-compose -f docker-compose.yml up -d
       - name: Install testing dependencies
