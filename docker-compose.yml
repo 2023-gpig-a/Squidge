@@ -15,7 +15,7 @@ services:
     ports:
       - "8081:8080"
     volumes:
-      - ./dmas_config.ini:/config.ini
+      - ./dmas_config.ini:/app/config.ini
     environment:
       CONFIG_FILE: "/config.ini"
   frontend:
