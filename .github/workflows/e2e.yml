@@ -1,0 +1,66 @@
+name: E2E Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+          cache-dependency-path: ./requirements.e2e.txt
+
+      - run: cp dmas_config.ini.example dmas_config.ini
+      - name: Download weights
+        run: |
+          mkdir -p DMAS/models/human_detection/weights
+          wget -O DMAS/models/human_detection/weights/human_classification_weights.pkl https://storage.googleapis.com/2023-gpig-a/human_classification_weights.pkl
+
+      - name: Pull images
+        run: docker compose pull
+
+      - name: Build services
+        run: docker compose build
+
+      - name: Start services
+        run: docker compose up -d
+
+      - name: Install testing dependencies
+        run: pip install -r requirements.e2e.txt
+
+      - name: Install browsers
+        run: playwright install chromium
+
+      - name: Run tests
+        run: pytest --browser chromium --tracing retain-on-failure --video retain-on-failure e2e/
+
+      - name: Capture logs
+        if: failure()
+        run: docker-compose logs -t --no-color > test-results/logs.txt
+      - name: Capture failure artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-results
+          path: test-results/
+      - name: Send Discord message
+        uses: tsickert/discord-webhook@v6.0.0
+        if: failure()
+        with:
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          content: |
+            E2E tests failed on branch: ${{ github.ref }}
+            [View logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) 
+            [View artifacts](${{ github.server_url }}/${{ github.repository }}/runs/${{ github.run_id }}/artifacts)

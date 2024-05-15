@@ -1,1 +1,8 @@
 dmas_config.ini
+venv/
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+test-results/
