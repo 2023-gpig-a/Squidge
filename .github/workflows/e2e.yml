@@ -20,6 +20,7 @@ jobs:
         with:
           python-version: '3.x'
           cache: 'pip'
+          cache-dependency-path: ./requirements.e2e.txt
 
       - run: cp dmas_config.ini.example dmas_config.ini
       - name: Download weights
@@ -37,7 +38,7 @@ jobs:
         run: docker compose up -d
 
       - name: Install testing dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r requirements.e2e.txt
 
       - name: Install browsers
         run: playwright install chromium
